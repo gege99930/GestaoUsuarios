@@ -3,7 +3,18 @@
     <td>{{ cliente.nome }}</td>
     <td>{{ cliente.email }}</td>
     <td>
-        <button class="btn btn-primary">Editar</button>
-        <button class="btn btn-danger">Deletar</button>
+        <button class="btn btn-primary" 
+            c-get="{{ url_for('cliente.form_edit_clientes', cliente_id=cliente.id) }}"
+            c-target="#form_cliente">
+                Editar
+        </button>
+
+
+
+        <button class="btn btn-danger" 
+            c-delete="{{ url_for('cliente.delete_clientes', cliente_id=cliente.id )}}"
+            c-remove-closest="tr">
+                Deletar
+        </button>
     </td>
   </tr>

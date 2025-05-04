@@ -38,7 +38,11 @@ def detalhe_clientes(cliente_id):
 """formulario para editar um cliente"""
 @cliente_route.route('/<int:cliente_id>/edit')
 def form_edit_clientes(cliente_id):
-    return render_template('for_edit_clientes.html')
+    cliente = None
+    for c in CLIENTES:
+        if c['id'] == cliente_id:
+            cliente = c
+    return render_template('form_clientes.html', cliente = cliente)
 
 
 """atualizar informacao de um cliente"""
@@ -50,5 +54,7 @@ def update_clientes(cliente_id):
 """deletar informacoes de um cliente"""
 @cliente_route.route('/<int:cliente_id>/delete', methods=['DELETE'])
 def delete_clientes(cliente_id):
-    pass
+    global CLIENTES
+    CLIENTES=[ c for c in CLIENTES if c['id'] != cliente_id ]
+    return{'deletd': 'ok'}
 
